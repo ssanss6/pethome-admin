@@ -15,7 +15,7 @@
           <el-menu-item index="/grooming-orders" disabled>洗护订单</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="资源">
-          <el-menu-item index="/cages" disabled>房型与笼位</el-menu-item>
+          <el-menu-item index="/resources">房型与笼位</el-menu-item>
           <el-menu-item index="/schedule" disabled>美容师排班</el-menu-item>
           <el-menu-item index="/pricing" disabled>服务与定价</el-menu-item>
         </el-menu-item-group>
@@ -28,7 +28,7 @@
 
     <el-container>
       <el-header class="header">
-        <div class="title">笼位预约看板</div>
+        <div class="title">{{ pageTitle }}</div>
         <div class="user">
           店长 · {{ user?.nickname || '管理员' }}
           <el-button link type="primary" @click="onLogout">退出</el-button>
@@ -51,6 +51,13 @@ const router = useRouter()
 const store = useUserStore()
 const user = computed(() => store.user)
 const activeMenu = computed(() => route.path)
+const pageTitle = computed(() => {
+  const titles: Record<string, string> = {
+    '/dashboard': '笼位预约看板',
+    '/resources': '房型与笼位'
+  }
+  return titles[route.path] || '毛孩子管理后台'
+})
 
 function onLogout() {
   store.logout()
