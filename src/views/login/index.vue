@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="login-card">
-      <div class="logo">🐾</div>
+      <div class="logo"><el-icon :size="48"><Shop /></el-icon></div>
       <h2>毛孩子管理后台</h2>
       <p class="sub">门店管理 · 请使用管理员账号登录</p>
 
@@ -33,6 +33,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { Shop } from '@element-plus/icons-vue'
 import { useUserStore } from '../../stores/user'
 
 const router = useRouter()

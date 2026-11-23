@@ -1,7 +1,10 @@
 <template>
   <el-container class="layout">
     <el-aside width="200px" class="sidebar">
-      <div class="logo"><span class="mark">🐾</span>毛孩子管理后台</div>
+      <div class="logo">
+        <el-icon class="mark"><Shop /></el-icon>
+        <span>毛孩子管理后台</span>
+      </div>
       <el-menu
         :default-active="activeMenu"
         router
@@ -10,18 +13,42 @@
         active-text-color="#FF9B6E"
       >
         <el-menu-item-group title="经营">
-          <el-menu-item index="/dashboard">笼位预约看板</el-menu-item>
-          <el-menu-item index="/orders" disabled>寄养订单</el-menu-item>
-          <el-menu-item index="/grooming-orders" disabled>洗护订单</el-menu-item>
+          <el-menu-item index="/dashboard">
+            <el-icon><Calendar /></el-icon>
+            <span>笼位预约看板</span>
+          </el-menu-item>
+          <el-menu-item index="/orders" disabled>
+            <el-icon><Tickets /></el-icon>
+            <span>寄养订单</span>
+          </el-menu-item>
+          <el-menu-item index="/grooming-orders" disabled>
+            <el-icon><Goods /></el-icon>
+            <span>洗护订单</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="资源">
-          <el-menu-item index="/resources">房型与笼位</el-menu-item>
-          <el-menu-item index="/schedule" disabled>美容师排班</el-menu-item>
-          <el-menu-item index="/pricing" disabled>服务与定价</el-menu-item>
+          <el-menu-item index="/resources">
+            <el-icon><House /></el-icon>
+            <span>房型与笼位</span>
+          </el-menu-item>
+          <el-menu-item index="/schedule" disabled>
+            <el-icon><Timer /></el-icon>
+            <span>美容师排班</span>
+          </el-menu-item>
+          <el-menu-item index="/pricing" disabled>
+            <el-icon><PriceTag /></el-icon>
+            <span>服务与定价</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="财务">
-          <el-menu-item index="/settlement" disabled>离店结算</el-menu-item>
-          <el-menu-item index="/reports" disabled>经营报表</el-menu-item>
+          <el-menu-item index="/settlement" disabled>
+            <el-icon><Money /></el-icon>
+            <span>离店结算</span>
+          </el-menu-item>
+          <el-menu-item index="/reports" disabled>
+            <el-icon><TrendCharts /></el-icon>
+            <span>经营报表</span>
+          </el-menu-item>
         </el-menu-item-group>
       </el-menu>
     </el-aside>
@@ -45,6 +72,9 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '../stores/user'
+import {
+  Shop, Calendar, Tickets, Goods, House, Timer, PriceTag, Money, TrendCharts
+} from '@element-plus/icons-vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -83,7 +113,8 @@ function onLogout() {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .mark {
-  font-size: 16px;
+  font-size: 18px;
+  color: #ff7a45;
 }
 .header {
   background: #fff;
