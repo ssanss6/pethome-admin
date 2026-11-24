@@ -44,12 +44,29 @@
 </template>
 
 <script setup lang="ts">
-const stats = [
-  { key: '今日在住', value: '14', unit: '只', delta: '较昨日 +2', color: '#2E9E5B' },
-  { key: '本周入住率', value: '76', unit: '%', delta: '环比 +8%', color: '#2E9E5B' },
-  { key: '今日洗护', value: '9', unit: '单', delta: '已完成 4', color: '#2E9E5B' },
-  { key: '待离店结算', value: '3', unit: '单', delta: '需处理', color: '#C4541F' }
-]
+import { ref, onMounted } from 'vue'
+import request from '../../api/request'
+
+const stats = ref([
+  { key: '今日在住', value: '--', unit: '只', delta: '', color: '#2E9E5B' },
+  { key: '入住率', value: '--', unit: '%', delta: '', color: '#2E9E5B' },
+  { key: '今日洗护完成', value: '--', unit: '单', delta: '', color: '#2E9E5B' },
+  { key: '客单价', value: '--', unit: '', delta: '', color: '#2E9E5B' }
+])
+
+onMounted(async () => {
+  try {
+    const data: any = await request.get('/reports/summary')
+    stats.value = [
+      { key: '今日在住', value: String(data.inBoarding ?? 0), unit: '只', delta: '笼位 ' + (data.totalCages ?? 0), color: '#2E9E5B' },
+      { key: '入住率', value: String(data.occupancyRate ?? 0), unit: '%', delta: '', color: '#2E9E5B' },
+      { key: '今日洗护完成', value: String(data.todayGroomingDone ?? 0), unit: '单', delta: '', color: '#2E9E5B' },
+      { key: '客单价', value: '¥' + (data.avgOrderAmount ?? 0), unit: '', delta: '', color: '#2E9E5B' }
+    ]
+  } catch (e) {
+    /* 后端未启动时保持占位 */
+  }
+})
 
 const days = [
   { key: '0612', label: '06-12 三', today: false },
